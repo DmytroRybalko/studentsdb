@@ -1,86 +1,93 @@
 <!DOCTYPE html>
 <html lang="uk">
-	
-	<head>
-		<meta charset="UTF-8"/>
-		<title>Сервіс Обліку Студентів</title>
-		<meta name="description"
-			  value="Система Обліку Студентів Начального Закладу" />
 
-		<!-- Iclude Styles -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-		<!--link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstr\
+<head>
+  <meta charset="UTF-8"/>
+  <title>Сервіс Обліку Студентів</title>
+  <meta name="description"
+        value="Система Обліку Студентів Начального Закладу" />
+
+  <!-- Iclude Styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstr\
 ap.min.css"-->
-		
-	
-	</head>
 
-	<body>
-		
-		<!-- Start Container-->
-		<div class="container">
 
-			<!-- Start Header-->
-			<div class="row" id="header">
+</head>
 
-				<!-- Logo -->
-				<div class="col-xs-8">
-					<h1>Сервіс Обліку Студентів</h>
-				</div>
+<body>
 
-				<!-- Groups Selector -->
-				<div class="col-xs-4" id="group-selector">
-					<strong>Група:</strong>
-					<select>
-						<option value="">Усі Студенти</option>
-						<option value="">ВЛ - 81, Дмитро Рибалко (№254)</option>
-						<option value="">ВА - 81, Корост Андрій (№2123)</option>
-					</select>
-				</div>
-			</div>
-			<!-- End Header -->
+<!-- Start Container-->
+<div class="container">
 
-			<!-- Start SubHeader -->
-			<div class="row" id="sub-header">
-				<div class="col-xs-12">
-					<ul class="nav nav-tabs">
-  					<li role="presentation" class="active"><a href="#">Студенти</a></li>
-  					<li role="presentation"><a href="#">Відвідуваня</a></li>
-  					<li role="presentation"><a href="#">Групи</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- End SubHeader -->
+  <!-- Start Header-->
+  <div class="row" id="header">
+    <!-- Logo -->
+    <div class="col-xs-8">
+      <h1>Сервіс Обліку Студентів</h1>
+    </div>
 
-			<!-- Start Main Page Content -->
-			<div class="row" id="content-columns">
-				
-				<div class="col-xs-12" id="content-column">
-					Контент, Список Студентів
-				</div>
+    <!-- Groups Selector -->
+    <div class="col-xs-4" id="group-selector">
+      <strong>Група:</strong>
+      <select>
+        <option value="">Усі Студенти</option>
+        <option value="">ВЛ - 81, Дмитро Рибалко (№254)</option>
+        <option value="">ВА - 81, Корост Андрій (№2123)</option>
+      </select>
+    </div>
+  </div>
+  <!-- End Header -->
 
-			</div>
-			<!-- End Main Page Content -->
+  <!-- Start SubHeader -->
+  <div class="row" id="sub-header">
+    <div class="col-xs-12">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Студенти</a></li>
+        <li role="presentation"><a href="#">Відвідуваня</a></li>
+        <li role="presentation"><a href="#">Групи</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- End SubHeader -->
 
-			<!-- Start Footer -->
-			<div class="row" id="footer">
-				<div class="col-xs-12">
-					&copy; 2015 Сервіс Обліку Студентів
-				</div>
-			</div>
-			<!-- End Footer-->
+  <!-- Start Main Page Content -->
+  <div class="row" id="content-columns">
+    <div class="col-xs-12" id="content-column">
 
-		</div>
-		<!-- End Container -->
-		
-		<h1>Вітаю вас на нашій сторінці!</h1>
-		<p>Поки тут порожньо, але незабаром ми матимемо список студентів</p>
+      <!-- Status Message -->
+      <div class="alert alert-warning" role="alert">Зміни скасовано.</div>
 
-		<!-- JavaScript Section -->
-		<!--script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/\
+      <h2>База Студентів</h2>
+
+      <!-- Add Student Button -->
+      <a class="btn btn-primary" href="#">Додати Студента</a>
+      <div>Тут буде таблиця для студентів</div>
+
+    </div>
+
+  </div>
+  <!-- End Main Page Content -->
+
+  <!-- Start Footer -->
+  <div class="row" id="footer">
+    <div class="col-xs-12">
+      &copy; 2015 Сервіс Обліку Студентів
+    </div>
+  </div>
+  <!-- End Footer-->
+
+</div>
+<!-- End Container -->
+
+<h1>Вітаю вас на нашій сторінці!</h1>
+<p>Поки тут порожньо, але незабаром ми матимемо список студентів</p>
+
+<!-- JavaScript Section -->
+<!--script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/\
 jquery.js"></script-->
-		<!--script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstr\
+<!--script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstr\
 ap.min.js"></script-->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-	</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</body>
 </html>
