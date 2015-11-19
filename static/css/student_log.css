@@ -24,11 +24,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Right Arrow */
 .pager {
-<<<<<<< HEAD
-    margin:10px;
-=======
-    margin:0px;
->>>>>>> 2bbf1d73c0222803884a5afac3c8f7a03075a9eb
+    margin: 10px;
 }
 
 .pager .next a {
@@ -37,14 +33,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0px;
 }
 
-/*.pagination {
-    display: none;
-    margin: 0px;*/
-<<<<<<< HEAD
-
-=======
-}
->>>>>>> 2bbf1d73c0222803884a5afac3c8f7a03075a9eb
 #footer {
     border-top: 1px solid #dddddd;
     padding-top: 10px;
