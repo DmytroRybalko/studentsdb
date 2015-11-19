@@ -9,6 +9,34 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #F9F9F9;
 }
 
+/* Month Name */
+
+/* Left Arrow */
+.pager {
+    margin:0px;
+}
+
+.pager .previous a {
+    float: none;
+    border: medium none;
+    padding: 0px;
+}
+
+/* Right Arrow */
+.pager {
+    margin:10px;
+}
+
+.pager .next a {
+    float: none;
+    border: medium none;
+    padding: 0px;
+}
+
+/*.pagination {
+    display: none;
+    margin: 0px;*/
+
 #footer {
     border-top: 1px solid #dddddd;
     padding-top: 10px;
