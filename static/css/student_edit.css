@@ -1,0 +1,24 @@
+/* Global Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+/* Change width of input fields */
+.form-control {
+    width: 30%;
+    font-size: 16px;
+}
+
+/* Set label's font weight for Name, Surmane, etc.*/
+label {
+    font-weight: normal;
+}
+
+body {
+    font-size: 16px;
+}
+
+/* Buttom for loading files*/
+input[type="file"] {
+    display: inline-block;
+}

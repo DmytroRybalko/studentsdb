@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>Сервіс Обліку Студентів</title>
+  <meta name="description"
+        value="Система Обліку Студентів Начального Закладу" />
+
+  <!-- Iclude Styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/student_edit.css">
+
+</head>
+
+<body>
+
+  <!-- Start Container-->
+  <div class="container">
+
+    <!-- Start Header-->
+    <div class="row" id="header">
+      <!-- Logo -->
+      <div class="col-xs-8">
+        <h1>Форма Редагування Студента</h1>
+      </div>
+    </div>
+
+    <!-- Start Form -->
+    <form class="form-horizontal">
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Ім'я*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" placeholder="Дмитро">
+        </div>
+      </div>
+
+      <!-- Patronymic -->
+      <div class="form-group">
+        <label for="inputPatronymic" class="col-sm-2 control-label">По-батькові</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputPatronymic" placeholder="В'ячеславович">
+        </div>
+      </div>
+
+      <!-- Surname -->
+      <div class="form-group">
+        <label for="inputSurname" class="col-sm-2 control-label">Прізвище*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputSurname" placeholder="Рибалко">
+        </div>
+      </div>
+
+      <!-- Ticket Number -->
+      <div class="form-group">
+        <label for="inputTicketNo" class="col-sm-2 control-label">№ Білету*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputTicketNo" placeholder="254">
+        </div>
+      </div>
+
+      <!-- Birthday -->
+      <div class="form-group">
+        <label for="inputBirthday" class="col-sm-2 control-label">Дата народження</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="inputBirthday" placeholder="1981-03-01">
+        </div>
+      </div>
+
+      <!-- Choice of Photo -->
+      <div class="form-group">
+        <label for="inputTicketNo" class="col-sm-2 control-label">Фото</label>
+        <div class="col-sm-10">
+          <p>Наразі: <a href="./img/my_bike.jpg">my_photo</a></p>
+          <p>Очистити</p>
+        </div>
+      </div>
+
+      <!-- Chosen File Block -->
+
+      <div class="form-group">
+        <label for="exampleInputFile" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <p>Замінити: <input type="file"></p>
+        </div>
+
+      </div>
+      <!--div class="form-group">
+        <label for="inputTicketNo" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <p>Замінити:
+            <button type="button" class="btn btn-primary btn-xs">Choose File</button>
+            No file chosen
+          </p>
+        </div>
+      </div-->
+
+      <!-- Choice of Group -->
+      <div class="form-group">
+        <label for="chooseGroup" class="col-sm-2 control-label">Група*</label>
+        <div class="col-sm-10">
+          <select class="form-control">
+            <option>ВЛ-81</option>
+            <option>ВТ-81</option>
+            <option>ВА-81</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Additional Notes -->
+      <div class="form-group">
+        <label for="inputAdditionalNotes" class="col-sm-2 control-label">Додаткові Нотатки</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <p>
+            <button type="button" class="btn btn-primary btn-lg">Зберегти</button>
+            <button type="button" class="btn btn-default btn-lg">Скасувати</button>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- End Container -->
+
+<!-- JavaScript Section -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</body>
+</html>
