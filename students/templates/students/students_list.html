@@ -41,9 +41,9 @@
     <div class="row" id="sub-header">
       <div class="col-xs-12">
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="#">Студенти</a></li>
-          <li role="presentation"><a href="#">Відвідуваня</a></li>
-          <li role="presentation"><a href="#">Групи</a></li>
+          <li role="presentation" class="active"><a href="/">Студенти</a></li>
+          <li role="presentation"><a href="/journal">Відвідуваня</a></li>
+          <li role="presentation"><a href="/groups">Групи</a></li>
         </ul>
       </div>
     </div>
@@ -59,7 +59,7 @@
         <h2>База Студентів</h2>
 
         <!-- Add Student Button -->
-        <a class="btn btn-primary" href="#">Додати Студента</a>
+        <a href="/students/add" class="btn btn-primary">Додати Студента</a>
 
         <!-- Start Students Listing -->
         <table class="table table-hover table-striped">
@@ -77,23 +77,27 @@
             <tr>
               <td>1</td>
               <td><img height="30" width="30" src="./img/my_bike.jpg" class="img-circle" /></td>
-              <td><a title="Редагувати" href="#">Рибалко</a></td>
-              <td><a title="Редагувати" href="#">Дмитро</a></td>
+              <td><a title="Редагувати" href="/students/1/edit">Рибалко</a></td>
+              <td><a title="Редагувати" href="/students/1/edit">Дмитро</a></td>
               <td>2123</td>
               <td>
-                <div class="dropdown">
+                <!--div class="dropdown"-->
+                <div class="btn-group">
+                  <!--button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"-->
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія\
-                  <span class="caret"></span>
+                    <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Відвідування</a>
+                    <!--li role="presentation"-->
+                    <li>
+                      <!--a role="menuitem" tabindex="-1" href="/journal/1">Відвідування</a-->
+                      <a href="/journal/1">Відвідування</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                        <a role="menuitem" tabindex="-1" href="/students/1/edit">Редагувати</a>
                     </li>
                     <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Видалити</a>
+                      <a role="menuitem" tabindex="-1" href="/students/1/delete">Видалити</a>
                     </li>
                   </ul>
                 </div>
@@ -103,8 +107,8 @@
               <!-- Second Row -->
               <td>2</td>
               <td><img height="30" width="30" src="./img/vika.jpg" class="img-circle" /></td>
-              <td><a title="Редагувати" href="#">Якуніна</a></td>
-              <td><a title="Редагувати" href="#">Вікторія</a></td>
+              <td><a title="Редагувати" href="/students/2/edit">Якуніна</a></td>
+              <td><a title="Редагувати" href="/students/2/edit">Вікторія</a></td>
               <td>2124</td>
               <td>
                 <div class="dropdown">
@@ -113,13 +117,13 @@
                   </button>
                   <ul class="dropdown-menu" role="menu">
                     <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Відвідування</a>
+                      <a role="menuitem" tabindex="-1" href="/journal/2">Відвідування</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                        <a role="menuitem" tabindex="-1" href="/students/2/edit">Редагувати</a>
                     </li>
                     <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Видалити</a>
+                      <a role="menuitem" tabindex="-1" href="/students/2/delete">Видалити</a>
                     </li>
                   </ul>
                 </div>
@@ -128,8 +132,8 @@
             <!-- Third Row-->
               <td>3</td>
               <td><img height="30" width="30" src="./img/GoITnewLife.jpg" class="img-circle" /></td>
-              <td><a title="Редагувати" href="#">Корост</a></td>
-              <td><a title="Редагувати" href="#">Андрій</a></td>
+              <td><a title="Редагувати" href="/students/3/edit">Корост</a></td>
+              <td><a title="Редагувати" href="/students/3/edit">Андрій</a></td>
               <td>2125</td>
               <td>
                 <div class="dropdown">
@@ -138,13 +142,13 @@
                   </button>
                   <ul class="dropdown-menu" role="menu">
                     <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Відвідування</a>
+                      <a role="menuitem" tabindex="-1" href="/journal/3">Відвідування</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                        <a role="menuitem" tabindex="-1" href="/students/3/edit">Редагувати</a>
                     </li>
                     <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="#">Видалити</a>
+                      <a role="menuitem" tabindex="-1" href="/students/3/delete">Видалити</a>
                     </li>
                   </ul>
                 </div>
