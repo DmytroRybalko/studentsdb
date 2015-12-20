@@ -20,39 +20,13 @@
 
 <table class="table table-hover table-striped table-bordered">
   <thead>
+
   <tr>
     <th><a href="">№</a></th>
     <th>Студент</th>
-    <th>Нд 1</th>
-    <th>Пн 2</th>
-    <th>Вт 3</th>
-    <th>Ср 4</th>
-    <th>Чт 5</th>
-    <th>Пт 6</th>
-    <th>Сб 7</th>
-    <th>Нд 8</th>
-    <th>Пн 9</th>
-    <th>Вт 10</th>
-    <th>Ср 11</th>
-    <th>Чт 12</th>
-    <th>Пт 13</th>
-    <th>Сб 14</th>
-    <th>Нд 15</th>
-    <th>Пн 16</th>
-    <th>Вт 17</th>
-    <th>Ср 18</th>
-    <th>Чт 19</th>
-    <th>Пт 20</th>
-    <th>Сб 21</th>
-    <th>Нд 22</th>
-    <th>Пн 23</th>
-    <th>Вт 24</th>
-    <th>Ср 25</th>
-    <th>Чт 26</th>
-    <th>Пт 27</th>
-    <th>Сб 28</th>
-    <th>Нд 29</th>
-    <th>Пн 30</th>
+    {% for weekdays in calendar %}
+    <th>{{ weekdays.day }}<br>{{ weekdays.date }}</th>
+    {% endfor %}
   </tr>
   </thead>
   <tbody>
