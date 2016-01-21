@@ -50,7 +50,7 @@
   <div>
     <label for="student_group">Група*</label>
     <span class="help-block" style="display:inline-block">{{ errors.student_group }}</span>
-    <select name="student_group" id="student_group" class="form-control">
+    <select name="student_group" id="student_group">
       <option value="">Виберіть групу</option>
       {% for group in groups %}
       <option value="{{ group.id }}" {% if group.id == request.POST.student_group|add:0 %}selected="1"{% endif %}>{{ group.title }}</option>
@@ -69,3 +69,11 @@
 </form>
 
 {% endblock content %}
+
+{% block status_message %}
+  {% if errors %}
+  <div class="alert alert-warning" role="alert">
+    Будь-ласка, виправте наступні помилки
+  </div>
+  {% endif %}
+{% endblock status_message %}
