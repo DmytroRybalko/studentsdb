@@ -23,7 +23,7 @@ class Student(models.Model):
     middle_name = models.CharField(
         max_length=256,
         blank=True,
-        verbose_name=u"Дата народження",
+        verbose_name=u"По-батькові",
         null=True)
 
     birthday = models.DateField(
