@@ -66,11 +66,17 @@ class StudentDeleteView(DeleteView):
 
 # Views for Students
 def students_list(request):
+    # Set field name for ordering by default
+    order_by_default = 'last_name'
+
     students = Student.objects.all()
 
+    # Get list of all model's fields name
+    students_fields = Student._meta.get_all_field_names()
+
     # try to order students list
-    order_by = request.GET.get('order_by', '')
-    if order_by in ('last_name', 'first_name', 'ticket'):
+    order_by = request.GET.get('order_by', order_by_default)
+    if order_by in students_fields:
         students = students.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             students = students.reverse()
@@ -88,7 +94,9 @@ def students_list(request):
         # last page of results.
         students = paginator.page(paginator.num_pages)
 
-    return render(request, 'students/students_list.html', {'students': students})
+    return render(request, 'students/students_list.html',
+                  {'students': students,
+                   'order_by_default':order_by_default})
 
 def students_add(request):
     # was form posted?
