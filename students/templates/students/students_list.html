@@ -16,7 +16,14 @@
   {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   <thead>
   <tr>
-    <th><a href="">№</a></th>
+    <th>
+      <a href="{% url 'home' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        №
+        {% if order_by == 'id' and reverse != '1' %}&uarr;
+        {% elif order_by == 'id' and reverse == '1' %}&darr;
+        {% endif %}
+      </a>
+    </th>
     <th>Фото</th>
     <th>
       <a href="{% url 'home' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' or not request.GET.items %}&amp;reverse=1{% endif %}">
@@ -50,7 +57,8 @@
   <tbody>
     {% for student in students %}
     <tr>
-      <td>{{ forloop.counter }}</td>
+      <!--<td>{{ forloop.counter }}</td>-->
+      <td>{{ student.pk }}</td>
       <td>
         {% if student.photo %}
           <img class="img-circle" src="{{ student.photo.url }}"

@@ -68,9 +68,13 @@ class StudentDeleteView(DeleteView):
 def students_list(request):
     # Set field name for ordering by default
     order_by_default = 'last_name'
-
     students = Student.objects.all()
 
+    # Create dictionary where students pk are keys and their
+    # counting numbers are values
+    students_pk =[i.pk for i in students]
+    pk2No = dict(zip(students_pk,(range(1,len(students_pk)))))
+    # TODO: learn docs about annotation atribute of QuerySet
     # Get list of all model's fields name
     students_fields = Student._meta.get_all_field_names()
 
