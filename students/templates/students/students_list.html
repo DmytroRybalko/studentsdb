@@ -2,6 +2,8 @@
 
 {% load static from staticfiles %}
 
+{% load my_filters %}
+
 {% block meta_title %}Студенти{% endblock meta_title %}
 
 {% block title %}База Студентів{% endblock title %}
@@ -57,8 +59,7 @@
   <tbody>
     {% for student in students %}
     <tr>
-      <!--<td>{{ forloop.counter }}</td>-->
-      <td>{{ student.pk }}</td>
+      <td>{{ students_pk|order_number:student.pk }}</td>
       <td>
         {% if student.photo %}
           <img class="img-circle" src="{{ student.photo.url }}"

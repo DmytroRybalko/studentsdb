@@ -70,11 +70,9 @@ def students_list(request):
     order_by_default = 'last_name'
     students = Student.objects.all()
 
-    # Create dictionary where students pk are keys and their
-    # counting numbers are values
-    students_pk =[i.pk for i in students]
-    pk2No = dict(zip(students_pk,(range(1,len(students_pk)))))
-    # TODO: learn docs about annotation atribute of QuerySet
+    # Collect sorted student's id into separate list
+    students_pk =[pk.pk for pk in students]
+
     # Get list of all model's fields name
     students_fields = Student._meta.get_all_field_names()
 
@@ -100,7 +98,8 @@ def students_list(request):
 
     return render(request, 'students/students_list.html',
                   {'students': students,
-                   'order_by_default':order_by_default})
+                   'order_by_default':order_by_default,
+                   'students_pk': students_pk})
 
 def students_add(request):
     # was form posted?
