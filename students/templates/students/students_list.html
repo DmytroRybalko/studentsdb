@@ -95,24 +95,38 @@
 
 <!-- End Students Listing -->
 
-{% if students.has_other_pages %}
-{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 <nav>
+  {% with order_by=request.GET.order_by reverse=request.GET.reverse  %}
   <ul class="pagination">
     <li><a href="{% url 'home' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
-    {% for p in students.paginator.page_range %}
-    <li  {% if students.number == p %}class="active"{% endif %}>
-      <a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
-    </li>
+    {% for p in page_range %}
+      <li {% if p == page %} class="active" {% endif %}>
+        <a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
+      </li>
     {% endfor %}
-    <li>
-      <a href="{% url 'home' %}?page={{ students.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>
-    </li>
+    <li><a href="{% url 'home' %}?page={{ page_range|length }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a></li>
   </ul>
+  {% endwith %}
 </nav>
-{% endwith %}
-{% endif %}
 
-<!--{% include "students/includes/nav.html" %}-->
+<!-- This is django paginator -->
+
+<!--{% if students.has_other_pages %}-->
+<!--{% with order_by=request.GET.order_by reverse=request.GET.reverse %}-->
+<!--<nav>-->
+  <!--<ul class="pagination">-->
+    <!--<li><a href="{% url 'home' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>-->
+    <!--{% for p in students.paginator.page_range %}-->
+    <!--<li  {% if students.number == p %}class="active"{% endif %}>-->
+      <!--<a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>-->
+    <!--</li>-->
+    <!--{% endfor %}-->
+    <!--<li>-->
+      <!--<a href="{% url 'home' %}?page={{ students.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</nav>-->
+<!--{% endwith %}-->
+<!--{% endif %}-->
 
 {% endblock content %}
