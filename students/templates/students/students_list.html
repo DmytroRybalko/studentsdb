@@ -59,7 +59,12 @@
   <tbody>
     {% for student in students %}
     <tr>
-      <td>{{ students_pk|order_number:student.pk }}</td>
+      <td>
+        {% if request.GET.order_by == 'id' %}{{ students_pk|order_number:student.pk }}
+        {% else %}
+        {{ forloop.counter0|add:students.start_index }}
+        {% endif %}
+      </td>
       <td>
         {% if student.photo %}
           <img class="img-circle" src="{{ student.photo.url }}"
@@ -95,38 +100,22 @@
 
 <!-- End Students Listing -->
 
-<nav>
-  {% with order_by=request.GET.order_by reverse=request.GET.reverse  %}
-  <ul class="pagination">
-    <li><a href="{% url 'home' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
-    {% for p in page_range %}
-      <li {% if p == page %} class="active" {% endif %}>
+{% if students.has_other_pages %}
+  {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+  <nav>
+    <ul class="pagination">
+      <li><a href="{% url 'home' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+      {% for p in students.paginator.page_range %}
+      <li  {% if students.number == p %}class="active"{% endif %}>
         <a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
       </li>
-    {% endfor %}
-    <li><a href="{% url 'home' %}?page={{ page_range|length }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a></li>
-  </ul>
+      {% endfor %}
+      <li>
+        <a href="{% url 'home' %}?page={{ students.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>
+      </li>
+    </ul>
+  </nav>
   {% endwith %}
-</nav>
-
-<!-- This is django paginator -->
-
-<!--{% if students.has_other_pages %}-->
-<!--{% with order_by=request.GET.order_by reverse=request.GET.reverse %}-->
-<!--<nav>-->
-  <!--<ul class="pagination">-->
-    <!--<li><a href="{% url 'home' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>-->
-    <!--{% for p in students.paginator.page_range %}-->
-    <!--<li  {% if students.number == p %}class="active"{% endif %}>-->
-      <!--<a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>-->
-    <!--</li>-->
-    <!--{% endfor %}-->
-    <!--<li>-->
-      <!--<a href="{% url 'home' %}?page={{ students.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>-->
-    <!--</li>-->
-  <!--</ul>-->
-<!--</nav>-->
-<!--{% endwith %}-->
-<!--{% endif %}-->
+{% endif %}
 
 {% endblock content %}

@@ -84,40 +84,21 @@ def students_list(request):
             students = students.reverse()
 
     # paginator students
-    row_per_page = 3
-    rows_in_db = Student.objects.count()
-    # calculate number of pages
-    # якщо залишок не нуль, то ...
-    if not (rows_in_db % row_per_page):
-        num_pages = (rows_in_db / row_per_page)
-    else:
-        num_pages = (rows_in_db / row_per_page) + 1
+    paginator = Paginator(students, 3)
+    page = request.GET.get('page')
     try:
-        page = int(request.GET.get('page'))
-    except ValueError:
-        # if page is empty string
-        page = 1
-    except TypeError:
-        # if page is None
-        page = 1
-    paginator = students[row_per_page*(page-1):row_per_page*page]
-    # paginator = Paginator(students, 3)
-    # page = request.GET.get('page')
-    # try:
-    #     students = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # if page is not an Integer, deliver first page.
-    #     students = paginator.page(1)
-    # except EmptyPage:
-    #     # If page is out of range (e.g. 9999), deliver
-    #     # last page of results.
-    #     students = paginator.page(paginator.num_pages)
+        students = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an Integer, deliver first page.
+        students = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver
+        # last page of results.
+        students = paginator.page(paginator.num_pages)
 
     return render(request, 'students/students_list.html',
-                  {'students': paginator,
+                  {'students': students,
                    'students_pk': students_pk,
-                   'page_range':range(1,num_pages + 1),
-                   'page': page,
                    'order_by_default':order_by_default})
 
 def students_add(request):
