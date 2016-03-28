@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, ValidationError
 
-from .models import Student, Group
+from .models.students import Student
+from .models.groups import Group
 
 class StudentFormAdmin(ModelForm):
 

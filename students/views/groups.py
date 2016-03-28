@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from ..models import Student, Group
+from ..models.students import Student
+from ..models.groups import Group
 
 def groups_list(request):
     # Set field name for ordering by default

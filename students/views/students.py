@@ -12,7 +12,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
 
-from ..models import Student, Group
+from ..models.students import Student
+from ..models.groups import Group
 
 class StudentUpdateForm(ModelForm):
     class Meta:
