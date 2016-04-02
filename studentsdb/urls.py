@@ -46,6 +46,17 @@ urlpatterns = patterns('',
     # Journal urls
     url(r'^journal/$', 'students.views.journal.students_log', name='journal'),
 
+    # Quiz urls
+    url(r'^quiz/$', 'students.views.quiz.quiz_list', name='quiz'),
+
+    url(r'^quiz/add/$', 'students.views.quiz.quiz_add', name='quiz_add'),
+
+    url(r'^quiz/(?P<qid>\d+)/edit/$', 'students.views.quiz.quiz_edit',
+        name='quiz_edit'),
+
+    url(r'^quiz/(?P<qid>\d+)/delete/$', 'students.views.quiz.quiz_delete',
+        name='quiz_delete'),
+
     url(r'^admin/', include(admin.site.urls)),
 
     # Contact Admin Form
