@@ -1,0 +1,1 @@
+from .quiz_grades import Grade

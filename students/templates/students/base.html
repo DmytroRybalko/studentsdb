@@ -53,6 +53,8 @@
           class="active"{% endif %}><a href="{% url 'groups' %}">Групи</a></li>
           <li role="presentation" {% if '/quiz' in request.path %} \
           class="active"{% endif %}><a href="{% url 'quiz' %}">Іспити</a></li>
+          <li role="presentation" {% if '/grades' in request.path %} \
+          class="active"{% endif %}><a href="{% url 'grades' %}">Оцінки</a></li>
           <li role="presentation" {% if '/contact_admin' in request.path %} \
           class="active"{% endif %}><a href="{% url 'contact_admin' %}">Контакт</a></li>
 

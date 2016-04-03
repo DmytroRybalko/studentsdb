@@ -7,6 +7,7 @@ from django.forms import ModelForm, ValidationError
 from .models.students import Student
 from .models.groups import Group
 from .models.quiz import Quiz
+from .models.quiz_grades import Grade
 
 class StudentFormAdmin(ModelForm):
 
@@ -36,3 +37,4 @@ class StudentAdmin(admin.ModelAdmin):
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group)
 admin.site.register(Quiz)
+admin.site.register(Grade)

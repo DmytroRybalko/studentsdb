@@ -43,6 +43,19 @@ urlpatterns = patterns('',
     url(r'^groups/(?P<gid>\d+)/delete/$', 'students.views.groups.groups_delete',
         name='groups_delete'),
 
+     # Quizes grade urls
+    url(r'^grades/$', 'students.views.quiz_grades.grades_list', name='grades'),
+
+    url(r'^grades/add/$', 'students.views.quiz_grades.grades_add', name='grades_add'),
+
+    url(r'^grades/(?P<grid>\d+)/edit/$', 'students.views.quiz_grades.grades_edit',
+        name='grades_edit'),
+
+    url(r'^grades/(?P<grid>\d+)/delete/$', 'students.views.quiz_grades.grades_delete',
+        name='grades_delete'),
+
+
+
     # Journal urls
     url(r'^journal/$', 'students.views.journal.students_log', name='journal'),
 
