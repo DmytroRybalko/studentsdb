@@ -1,0 +1,84 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% load my_filters %}
+
+{% block title %}Оцінки за екзамен "{{ details.0.quiz_name.subject }}" ({{ details.0.quiz_name.date_time.date }}){% endblock title %}
+
+{% block content %}
+<!-- Start Quiz Listing -->
+<table class="table table-hover table-striped">
+  {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+  <thead>
+  <tr>
+    <th>
+      <a href="{% url 'grades' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        №
+        {% if order_by == 'id' and reverse != '1' %}&uarr;
+        {% elif order_by == 'id' and reverse == '1' %}&darr;
+        {% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="{% url 'grades' %}?order_by=student_name{% if order_by == 'student_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        Студент
+        {% if order_by == 'student_name' and reverse != '1' %}&uarr;
+        {% elif order_by == 'student_name' and reverse == '1' %}&darr;
+        {% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="{% url 'grades' %}?order_by=grade{% if order_by == 'grade' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        Оцінка
+        {% if order_by == 'grade' and reverse != '1' %}&uarr;
+        {% elif order_by == 'grade' and reverse == '1' %}&darr;
+        {% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="{% url 'grades' %}?order_by=grade{% if order_by == 'grade' and reverse != '1' %}&amp;reverse=1{% endif %}">
+        Група
+        {% if order_by == 'grade' and reverse != '1' %}&uarr;
+        {% elif order_by == 'grade' and reverse == '1' %}&darr;
+        {% endif %}
+      </a>
+    </th>
+    <th>Дії</th>
+  </tr>
+  </thead>
+  {% endwith %}
+  <tbody>
+    {% for detail in details %}
+    <tr>
+      <td>
+        {{ forloop.counter }}
+      </td>
+      <td><a title="Редагувати" href="">
+        {{ detail.student_name }}</a>
+      </td>
+      <td><a title="Редагувати" href="">
+        {{ detail.grade }}</a>
+      </td>
+      <td><a title="Редагувати" href="">
+        {{ detail.student_name.student_group }}</a>
+      </td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+           <li><a href="">Результати</a></li>
+           <li><a href="">Редагувати</a></li>
+           <li><a href="">Видалити</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}

@@ -6,7 +6,7 @@
 
 {% block meta_title %}Оцінки{% endblock meta_title %}
 
-{% block title %}Оцінки{% endblock title %}
+{% block title %}Оцінки за екзамени{% endblock title %}
 
 {% block content %}
 
@@ -64,7 +64,7 @@
         {{ forloop.counter0|add:grades.start_index }}
         {% endif %}
       </td>
-      <td><a title="Редагувати" href="{% url 'grades_edit' my_grade.id %}">
+      <td><a title="Результати" href="{% url 'quiz_detail_list' my_grade.quiz_name.id %}">
         {{ my_grade.quiz_name }}</a>
       </td>
       <td><a title="Редагувати" href="{% url 'grades_edit' my_grade.id %}">
@@ -95,7 +95,7 @@
     <ul class="pagination">
       <li><a href="{% url 'grades' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
       {% for p in grades.paginator.page_range %}
-      <li  {% if quizes.number == p %}class="active"{% endif %}>
+      <li  {% if grades.number == p %}class="active"{% endif %}>
         <a href="{% url 'grades' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
       </li>
       {% endfor %}

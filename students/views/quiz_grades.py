@@ -52,3 +52,10 @@ def grades_edit(request, grid):
 
 def grades_delete(request, grid):
     return HttpResponse('<h1>Delete Greade %s</h1>' % grid)
+
+def quiz_grades_detail_list(request, qid):
+    # Get list of students and their grades that relative to particular quiz
+    # qid is the id of quez
+    details = Grade.objects.filter(quiz_name_id=qid)
+    return render(request, 'students/quiz_grades_detail_list.html',
+                  {'details':details})
