@@ -4,7 +4,7 @@
 
 {% load my_filters %}
 
-{% block title %}Оцінки за екзамен "{{ details.0.quiz_name.subject }}" ({{ details.0.quiz_name.date_time.date }}){% endblock title %}
+{% block title %}Оцінки студента "{{ details.0.student_name }}" за екзамени{% endblock title %}
 
 {% block content %}
 <!-- Start Quiz Listing -->
@@ -12,20 +12,20 @@
   <thead>
   <tr>
     <th><a href="#">№</a></th>
-    <th><a href="#">Студент</a></th>
+    <th><a href="#">Екзамен</a></th>
+    <th><a href="#">Дата</a></th>
     <th><a href="#">Оцінка</a></th>
-    <th><a href="#">Група</a></th>
   </tr>
   </thead>
   <tbody>
     {% for detail in details %}
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td><a title="Переглянути всі оцінки" href="{% url 'grades_student_detail_list' detail.student_name.id %}">
-        {{ detail.student_name }}</a>
-        </td>
+      <td><a title="До списку студентів" href="{% url 'quiz_detail_list' detail.quiz_name.id %}">
+        {{ detail.quiz_name.subject }}</a>
+      </td>
+      <td>{{ detail.quiz_name.date_time|date:"d/m/Y" }}</td>
       <td>{{ detail.grade }}</td>
-      <td>{{ detail.student_name.student_group }}</td>
     </tr>
     {% endfor %}
   </tbody>

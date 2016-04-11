@@ -59,7 +59,8 @@ urlpatterns = patterns('',
     url(r'^grades/(?P<qid>\d+)/quiz_detail_list/$', 'students.views.quiz_grades.quiz_grades_detail_list',
         name='quiz_detail_list'),
 
-
+    url(r'^grades/(?P<sid>\d+)/grades_student_detail_list/$', 'students.views.quiz_grades.grades_student_detail_list',
+        name='grades_student_detail_list'),
 
     # Journal urls
     url(r'^journal/$', 'students.views.journal.students_log', name='journal'),

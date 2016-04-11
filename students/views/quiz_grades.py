@@ -49,12 +49,33 @@ def grades_short_list(request):
     """
     List of unique quizes and numbers of students that have particular quiz.
     """
+    # TODO: add sort by quiz subject and date (as for students list)
+
     short = Grade.objects.values('quiz_name__subject',
                                  'quiz_name__date_time',
                                  'quiz_name_id').annotate(count_stud=
                                  Count('quiz_name')).order_by('quiz_name__subject')
     return render(request, 'students/quiz_grades_short_list.html',
                   {'short_list':short})
+
+#   grades_quiz_detail_list
+def quiz_grades_detail_list(request, qid):
+    """
+    Get list of students and their grades that relative to particular quiz.
+    qid is the id of quez. The list is ordered by students last names.
+     """
+    details = Grade.objects.filter(quiz_name_id=qid).order_by('student_name__last_name')
+    return render(request, 'students/quiz_grades_detail_list.html',
+                  {'details':details})
+
+def grades_student_detail_list(request, sid):
+    """
+    Get list of quizes and grades that relative to particular student
+    sid is the id of student. The list is ordered by quiz names.
+     """
+    details = Grade.objects.filter(student_name_id=sid).order_by('quiz_name__subject')
+    return render(request, 'students/grades_student_detail_list.html',
+                  {'details': details})
 
 def grades_add(request):
     return HttpResponse('<h1>Grade Add Form</h1>')
@@ -64,12 +85,3 @@ def grades_edit(request, grid):
 
 def grades_delete(request, grid):
     return HttpResponse('<h1>Delete Greade %s</h1>' % grid)
-
-def quiz_grades_detail_list(request, qid):
-    """
-    Get list of students and their grades that relative to particular quiz
-    qid is the id of quez. The list is ordered by students last names.
-     """
-    details = Grade.objects.filter(quiz_name_id=qid).order_by('student_name__last_name')
-    return render(request, 'students/quiz_grades_detail_list.html',
-                  {'details':details})

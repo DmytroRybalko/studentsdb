@@ -67,6 +67,7 @@ class StudentDeleteView(DeleteView):
 
 # Views for Students
 def students_list(request):
+    # TODO: replace sort functionality to function
     # Set field name for ordering by default
     order_by_default = 'last_name'
     students = Student.objects.all()
@@ -85,6 +86,7 @@ def students_list(request):
             students = students.reverse()
 
     # paginator students
+    # TODO: replace paginator to function
     paginator = Paginator(students, 3)
     page = request.GET.get('page')
     try:
