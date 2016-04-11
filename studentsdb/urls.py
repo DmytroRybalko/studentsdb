@@ -46,6 +46,8 @@ urlpatterns = patterns('',
      # Quizes grade urls
     url(r'^grades/$', 'students.views.quiz_grades.grades_list', name='grades'),
 
+    url(r'^grades/short/$', 'students.views.quiz_grades.grades_short_list', name='grades_short_list'),
+
     url(r'^grades/add/$', 'students.views.quiz_grades.grades_add', name='grades_add'),
 
     url(r'^grades/(?P<grid>\d+)/edit/$', 'students.views.quiz_grades.grades_edit',

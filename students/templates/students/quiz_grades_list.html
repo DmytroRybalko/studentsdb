@@ -6,12 +6,14 @@
 
 {% block meta_title %}Оцінки{% endblock meta_title %}
 
-{% block title %}Оцінки за екзамени{% endblock title %}
+{% block title %}Оцінки за екзамени {% endblock title %}
 
 {% block content %}
 
 <!-- Add Quiz Button -->
 <a href="{% url 'grades_add' %}" class="btn btn-primary" >Додати Оцінку</a>
+<a href="{% url 'grades' %}">детально</a> /
+<a href="{% url 'grades_short_list' %}">згорнути</a>
 
 <!-- Start Quiz Listing -->
 <table class="table table-hover table-striped">

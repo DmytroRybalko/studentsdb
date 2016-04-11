@@ -3,6 +3,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 
 # from ..models.students import Student
 # from ..models.groups import Group
@@ -43,6 +44,17 @@ def grades_list(request):
                   {'grades': grades,
                    'grades_pk': grades_pk,
                    'order_by_default':order_by_default})
+
+def grades_short_list(request):
+    """
+    List of unique quizes and numbers of students that have particular quiz.
+    """
+    short = Grade.objects.values('quiz_name__subject',
+                                 'quiz_name__date_time',
+                                 'quiz_name_id').annotate(count_stud=
+                                 Count('quiz_name')).order_by('quiz_name__subject')
+    return render(request, 'students/quiz_grades_short_list.html',
+                  {'short_list':short})
 
 def grades_add(request):
     return HttpResponse('<h1>Grade Add Form</h1>')
