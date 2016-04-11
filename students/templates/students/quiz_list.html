@@ -90,7 +90,7 @@
           <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-           <li><a href="">Результати</a></li>
+           <li><a href="{% url 'quiz_detail_list' quiz.id %}">Результати іспиту</a></li>
            <li><a href="{% url 'quiz_edit' quiz.id %}">Редагувати</a></li>
            <li><a href="{% url 'quiz_delete' quiz.id %}">Видалити</a></li>
           </ul>
