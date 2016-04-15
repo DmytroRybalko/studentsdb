@@ -8,6 +8,7 @@ class Grade(models.Model):
     class Meta(object):
         verbose_name = u"Оцінка"
         verbose_name_plural = u"Оцінки"
+        unique_together = (("quiz_name", "student_name"),)
 
     grade = models.CharField(
         max_length=256,
