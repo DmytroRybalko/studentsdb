@@ -36,10 +36,10 @@
       </a>
     </th>
     <th>
-      <a href="{% url 'groups' %}?order_by=steward{% if order_by == 'steward' and reverse != '1' %}&amp;reverse=1{% endif %}">
+      <a href="{% url 'groups' %}?order_by=steward__last_name{% if order_by == 'steward__last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
         Староста
-        {% if order_by == 'steward' and reverse != '1' %}&uarr;
-        {% elif order_by == 'steward' and reverse == '1' %}&darr;
+        {% if order_by == 'steward__last_name' and reverse != '1' %}&uarr;
+        {% elif order_by == 'steward__last_name' and reverse == '1' %}&darr;
         {% endif %}
       </a>
     <th>Дії</th>

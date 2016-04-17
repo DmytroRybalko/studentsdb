@@ -20,7 +20,8 @@ def groups_list(request):
 
     # try to order students list
     order_by = request.GET.get('order_by', order_by_default)
-    if order_by in fields:
+    # second condition let us sort by field in related model
+    if order_by or order_by.split('__')[0] in fields:
         groups = groups.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
