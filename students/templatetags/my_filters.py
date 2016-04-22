@@ -5,9 +5,13 @@ from django import template
 register = template.Library()
 
 
+def decrementing(big_num, value):
+    return big_num - value
+
 def get_order_number(seq, value):
     return seq.index(value) + 1
 
+register.filter('decrementing', decrementing)
 register.filter('order_number', get_order_number)
 
 @register.simple_tag(takes_context=True)
@@ -25,6 +29,7 @@ def sort_field(context, **kwargs):
     request = context['request']
     order_by_default = context['order_by_default']
 
+    # create request string when site starts
     if not request.GET.items() and order_by_default == kwargs.get('order_by',''):
         link = "<a href=\"/%(url)s/?order_by=%(order_by)s&reverse=1\">" \
                "%(name)s &uarr;</a>" % dict(**kwargs)

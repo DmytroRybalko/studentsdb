@@ -28,9 +28,10 @@
     {% for group in groups %}
     <tr>
       <td>
-        {% if request.GET.order_by == 'id' %}{{ groups_pk|order_number:group.pk }}
+        {% if request.GET.reverse == '1' %}
+          {{ groups.paginator.count|decrementing:groups.end_index|add:forloop.revcounter }}
         {% else %}
-        {{ forloop.counter0|add:groups.start_index }}
+          {{ forloop.counter0|add:groups.start_index }}
         {% endif %}
       </td>
       <td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">
