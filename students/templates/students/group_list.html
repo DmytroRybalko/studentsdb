@@ -17,7 +17,7 @@
 <table class="table table-hover table-striped">
   <thead>
   <tr>
-    <th>{% sort_field url='groups' order_by='id' name='№' %}</th>
+    <th><a href="#">№</a></th>
     <th>{% sort_field url='groups' order_by='title' name='Назва' %}</th>
     <th>{% sort_field url='groups' order_by='steward__last_name' name='Староста' %}
     </th>
@@ -25,13 +25,13 @@
   </tr>
   </thead>
   <tbody>
-    {% for group in groups %}
+    {% for group in query_set %}
     <tr>
       <td>
         {% if request.GET.reverse == '1' %}
-          {{ groups.paginator.count|decrementing:groups.end_index|add:forloop.revcounter }}
+          {{ query_set.paginator.count|decrementing:query_set.end_index|add:forloop.revcounter }}
         {% else %}
-          {{ forloop.counter0|add:groups.start_index }}
+          {{ forloop.counter0|add:query_set.start_index }}
         {% endif %}
       </td>
       <td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">
@@ -55,20 +55,7 @@
   </tbody>
 </table>
 
-{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
-<nav>
-  <ul class="pagination">
-    <li><a href="{% url 'groups' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
-    {% for p in groups.paginator.page_range %}
-    <li  {% if groups.number == p %}class="active"{% endif %}>
-      <a href="{% url 'groups' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
-    </li>
-    {% endfor %}
-    <li>
-      <a href="{% url 'groups' %}?page={{ groups.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>
-    </li>
-  </ul>
-</nav>
-{% endwith %}
+<!-- Start Pagination  -->
+{% include "students/includes/django_paginator.html" with url="groups" %}
 
 {% endblock content %}

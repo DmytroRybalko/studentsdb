@@ -1,0 +1,15 @@
+{% if query_set.has_other_pages %}
+  <nav>
+    <ul class="pagination">
+      <li><a href="{% url url %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+      {% for p in query_set.paginator.page_range %}
+      <li  {% if query_set.number == p %}class="active"{% endif %}>
+        <a href="{% url url %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
+      </li>
+      {% endfor %}
+      <li>
+        <a href="{% url url %}?page={{ query_set.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>
+      </li>
+    </ul>
+  </nav>
+{% endif %}
