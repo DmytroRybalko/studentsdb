@@ -7,24 +7,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ..models.students import Student
 from ..models.groups import Group
 
+from ..util import make_order_by
+
 def groups_list(request):
     # Set field name for ordering by default
     order_by_default = 'title'
     groups = Group.objects.all()
-
-    # Collect sorted group's id into separate list
-    groups_pk =[pk.pk for pk in groups]
-
-    # Get list of all model's fields name
+     # Get list of all model's fields name
     fields = Group._meta.get_all_field_names()
-
-    # try to order students list
     order_by = request.GET.get('order_by', order_by_default)
-    # second condition let us sort by field in related model
-    if order_by or order_by.split('__')[0] in fields:
-        groups = groups.order_by(order_by)
-        if request.GET.get('reverse', '') == '1':
-            groups = groups.reverse()
+    reverse = request.GET.get('reverse', '')
+    # try to order groups list
+    groups = make_order_by(fields, groups, order_by, reverse)
 
     # paginator groups
     paginator = Paginator(groups, 3)
@@ -41,7 +35,6 @@ def groups_list(request):
 
     return render(request, 'students/group_list.html',
                   {'groups': groups,
-                   'groups_pk': groups_pk,
                    'order_by_default':order_by_default})
 
 def groups_add(request):
