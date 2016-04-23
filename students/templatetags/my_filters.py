@@ -28,20 +28,20 @@ def sort_field(context, **kwargs):
     """
     request = context['request']
     order_by_default = context['order_by_default']
-
+    kwargs['url'] = request.build_absolute_uri('')
     # create request string when site starts
     if not request.GET.items() and order_by_default == kwargs.get('order_by',''):
-        link = "<a href=\"/%(url)s/?order_by=%(order_by)s&reverse=1\">" \
+        link = "<a href=\"%(url)s?order_by=%(order_by)s&reverse=1\">" \
                "%(name)s &uarr;</a>" % dict(**kwargs)
     else:
         order_by = request.GET.get('order_by','NO_order_by')
         reverse = request.GET.get('reverse','NO_reverse')
-        link = "<a href=\"/%(url)s/?order_by=%(order_by)s&reverse=\">" \
+        link = "<a href=\"%(url)s?order_by=%(order_by)s&reverse=\">" \
                "%(name)s</a>" % dict(**kwargs)
         if order_by == kwargs.get('order_by') and reverse != '1':
-            link = "<a href=\"/%(url)s/?order_by=%(order_by)s&reverse=1\">" \
+            link = "<a href=\"%(url)s?order_by=%(order_by)s&reverse=1\">" \
                    "%(name)s &uarr;</a>" % dict(**kwargs)
         elif order_by == kwargs.get('order_by') and reverse == '1':
-            link = "<a href=\"/%(url)s/?order_by=%(order_by)s&reverse=\">" \
+            link = "<a href=\"%(url)s?order_by=%(order_by)s&reverse=\">" \
                    "%(name)s &darr;</a>" % dict(**kwargs)
     return link

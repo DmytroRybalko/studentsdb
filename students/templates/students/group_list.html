@@ -18,8 +18,8 @@
   <thead>
   <tr>
     <th><a href="#">№</a></th>
-    <th>{% sort_field url='groups' order_by='title' name='Назва' %}</th>
-    <th>{% sort_field url='groups' order_by='steward__last_name' name='Староста' %}
+    <th>{% sort_field order_by='title' name='Назва' %}</th>
+    <th>{% sort_field order_by='steward__last_name' name='Староста' %}
     </th>
     <th>Дії</th>
   </tr>
@@ -56,6 +56,6 @@
 </table>
 
 <!-- Start Pagination  -->
-{% include "students/includes/django_paginator.html" with url="groups" %}
+{% include "students/includes/django_paginator.html" %}
 
 {% endblock content %}

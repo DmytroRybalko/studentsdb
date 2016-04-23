@@ -85,23 +85,37 @@ def students_list(request):
         if request.GET.get('reverse', '') == '1':
             students = students.reverse()
 
-    # paginator students
-    # TODO: replace paginator to function
-    paginator = Paginator(students, 3)
-    page = request.GET.get('page')
+     # paginator students
+    row_per_page = 4
+    rows_in_db = Student.objects.count()
+    # calculate number of pages
+    if rows_in_db % row_per_page:
+        num_pages = (rows_in_db / row_per_page) + 1
+    else:
+        num_pages = (rows_in_db / row_per_page)
     try:
-        students = paginator.page(page)
-    except PageNotAnInteger:
-        # if page is not an Integer, deliver first page.
-        students = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver
-        # last page of results.
-        students = paginator.page(paginator.num_pages)
+        page = int(request.GET.get('page'))
+    except ValueError:
+        # if page is empty string
+        page = 1
+    except TypeError:
+        # if page is None
+        page = 1
+    paginator = students[row_per_page*(page-1):row_per_page*page]
+
+    # order by order number ('№' field )
+    order_num = row_per_page*page - (row_per_page - 1)
+    # reverse ordering
+    revorder_num = (num_pages - 1 - page)*row_per_page + rows_in_db % row_per_page
+    if revorder_num < 0:
+        revorder_num = 0
 
     return render(request, 'students/students_list.html',
-                  {'students': students,
-                   'students_pk': students_pk,
+                  {'students': paginator,
+                   'order_num': order_num,
+                   'revorder_num': revorder_num,
+                   'page_range':range(1,num_pages + 1),
+                   'page': page,
                    'order_by_default':order_by_default})
 
 def students_add(request):

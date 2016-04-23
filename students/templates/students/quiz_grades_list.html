@@ -16,55 +16,24 @@
 <a href="{% url 'grades_short_list' %}">згорнути</a>
 
 <!-- Start Quiz Listing -->
-<!--TODO: replace by custom including tag -->
 <table class="table table-hover table-striped">
-  {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   <thead>
   <tr>
-    <th>
-      <a href="{% url 'grades' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
-        №
-        {% if order_by == 'id' and reverse != '1' %}&uarr;
-        {% elif order_by == 'id' and reverse == '1' %}&darr;
-        {% endif %}
-      </a>
-    </th>
-    <th>
-      <a href="{% url 'grades' %}?order_by=quiz_name{% if order_by == 'quiz_name' and reverse != '1' or not request.GET.items %}&amp;reverse=1{% endif %}">
-        Екзамен
-        {% if not request.GET.items %}&uarr;
-        {% elif order_by == 'quiz_name' and reverse != '1' %}&uarr;
-        {% elif order_by == 'quiz_name' and reverse == '1' %}&darr;
-        {% endif %}
-      </a>
-    </th>
-    <th>
-      <a href="{% url 'grades' %}?order_by=student_name{% if order_by == 'student_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
-        Студент
-        {% if order_by == 'student_name' and reverse != '1' %}&uarr;
-        {% elif order_by == 'student_name' and reverse == '1' %}&darr;
-        {% endif %}
-      </a>
-    </th>
-    <th>
-      <a href="{% url 'grades' %}?order_by=grade{% if order_by == 'grade' and reverse != '1' %}&amp;reverse=1{% endif %}">
-        Оцінка
-        {% if order_by == 'grade' and reverse != '1' %}&uarr;
-        {% elif order_by == 'grade' and reverse == '1' %}&darr;
-        {% endif %}
-      </a>
-    </th>
+    <th><a href="#">№</a></th></th>
+    <th>{% sort_field order_by='quiz_name__subject' name='Екзамен' %}</th>
+    <th>{% sort_field order_by='student_name__last_name' name='Студент' %}</th>
+    <th>{% sort_field order_by='grade' name='Оцінка' %}</th>
     <th>Дії</th>
   </tr>
   </thead>
-  {% endwith %}
   <tbody>
-    {% for my_grade in grades %}
+    {% for my_grade in query_set %}
     <tr>
       <td>
-        {% if request.GET.order_by == 'id' %}{{ grades_pk|order_number:my_grade.pk }}
+        {% if request.GET.reverse == '1' %}
+          {{ query_set.paginator.count|decrementing:query_set.end_index|add:forloop.revcounter }}
         {% else %}
-        {{ forloop.counter0|add:grades.start_index }}
+          {{ forloop.counter0|add:query_set.start_index }}
         {% endif %}
       </td>
       <td><a title="Результати" href="{% url 'quiz_detail_list' my_grade.quiz_name.id %}">
@@ -93,19 +62,7 @@
   </tbody>
 </table>
 
-{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
-  <nav>
-    <ul class="pagination">
-      <li><a href="{% url 'grades' %}?page=1&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&laquo;</a></li>
-      {% for p in grades.paginator.page_range %}
-      <li  {% if grades.number == p %}class="active"{% endif %}>
-        <a href="{% url 'grades' %}?page={{ p }}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">{{ p }}</a>
-      </li>
-      {% endfor %}
-      <li>
-        <a href="{% url 'grades' %}?page={{ grades.paginator.num_pages}}&amp;order_by={{ order_by|default:order_by_default }}&amp;reverse={{ reverse }}">&raquo;</a>
-      </li>
-    </ul>
-  </nav>
-{% endwith %}
+<!-- Start Pagination  -->
+{% include "students/includes/django_paginator.html" %}
+
 {% endblock content %}

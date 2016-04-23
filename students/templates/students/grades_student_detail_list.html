@@ -4,7 +4,7 @@
 
 {% load my_filters %}
 
-{% block title %}Оцінки студента "{{ details.0.student_name }}" за екзамени{% endblock title %}
+{% block title %}Оцінки студента "{{ query_set.0.student_name }}" за екзамени{% endblock title %}
 
 {% block content %}
 <!-- Start Quiz Listing -->
@@ -12,15 +12,21 @@
   <thead>
   <tr>
     <th><a href="#">№</a></th>
-    <th><a href="#">Екзамен</a></th>
-    <th><a href="#">Дата</a></th>
-    <th><a href="#">Оцінка</a></th>
+    <th>{% sort_field order_by='quiz_name__subject' name='Екзамен' %}</th>
+    <th>{% sort_field order_by='quiz_name__date_time' name='Дата' %}</th>
+    <th>{% sort_field order_by='grade' name='Оцінка' %}</th>
   </tr>
   </thead>
   <tbody>
-    {% for detail in details %}
+    {% for detail in query_set %}
     <tr>
-      <td>{{ forloop.counter }}</td>
+      <td>
+        {% if request.GET.reverse == '1' %}
+          {{ query_set.paginator.count|decrementing:query_set.end_index|add:forloop.revcounter }}
+        {% else %}
+          {{ forloop.counter0|add:query_set.start_index }}
+        {% endif %}
+      </td>
       <td><a title="До списку студентів" href="{% url 'quiz_detail_list' detail.quiz_name.id %}">
         {{ detail.quiz_name.subject }}</a>
       </td>
@@ -31,5 +37,6 @@
   </tbody>
 </table>
 
-<!--TODO: add paginator block -->
+{% include "students/includes/django_paginator.html" %}
+
 {% endblock content %}
