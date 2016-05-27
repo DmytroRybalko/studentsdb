@@ -7,12 +7,10 @@
 {% block title %}Видалити Студента{% endblock title %}
 
 {% block content %}
-
-<form action="{% url 'students_delete' object.id %}" method="post">
+  <form action="{% url 'students_delete' object.id %}" method="post">
       {% csrf_token %}
       <p>Ви дійсно хочете видалити студента "{{ object }}" ?</p>
       <input type="submit" value="Так" name="delete_button"
               class="btn btn-danger" /><br /><br />
-</form>
-
+  </form>
 {% endblock content %}

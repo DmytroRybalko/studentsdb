@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from django.views.generic import UpdateView, DeleteView
 from django.forms import ModelForm
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -43,27 +45,39 @@ class StudentUpdateForm(ModelForm):
             Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
         ))
 
-class StudentUpdateView(UpdateView):
+class StudentUpdateView(SuccessMessageMixin, UpdateView):
     model = Student
     template_name = 'students/students_edit.html'
     form_class = StudentUpdateForm
+    success_message = u'Студента %(name)s успішно змінено!'
 
     def get_success_url(self):
-        return u'%s?status_message=Студента успішно збережено!' % reverse('home')
+        return reverse('home')
 
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(u'%s?status_message=Редагування \
-                   студента відмінено' % reverse('home'))
+            messages.warning(request,
+                           u'Редагування студента %(name)s скасовано!' %
+                           dict(name=self.get_object()))
+            return HttpResponseRedirect(reverse('home'))
         else:
             return super(StudentUpdateView, self).post(request, *args, **kwargs)
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, name=self.get_object())
 
 class StudentDeleteView(DeleteView):
     model = Student
     template_name = 'students/students_confirm_delete.html'
+    success_message = u'Студента %(name)s успішно видалено!'
 
     def get_success_url(self):
-        return u'%s?status_message=Студента успішно видалено!' % reverse('home')
+        return reverse('home')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request,
+                         self.success_message % dict(name=self.get_object()))
+        return super(StudentDeleteView, self).delete(request, *args, **kwargs)
 
 # Views for Students
 def students_list(request):
@@ -177,21 +191,22 @@ def students_add(request):
             if not errors:
                 student = Student(**data)
                 student.save()
-
+                messages.success(request, u'Студента %s успішно додано!' % student)
                 # redirect user to students list
-                return HttpResponseRedirect(
-                    u'%s?status_message=Студента успішно додано!' % reverse('home'))
+                # return HttpResponseRedirect(reverse('home'))
+                return redirect('home')
 
             else:
                 # render from with errors and previous user input
+                messages.error(request, u'Будь-ласка, виправте наступні помилки:')
                 return render(request, 'students/students_add.html',
                     {'groups': Group.objects.all().order_by('title'),
                      'errors': errors})
 
         elif request.POST.get('cancel_button') is not None:
             # redirect to home page on cancel button
-            return HttpResponseRedirect(
-                u'%s?status_message=Додавання студента скасовано!' % reverse('home'))
+            messages.warning(request, u'Додавання студента скасовано!')
+            return HttpResponseRedirect(reverse('home'))
 
     else:
         # initial form render
@@ -200,9 +215,3 @@ def students_add(request):
 
     return render(request, 'students/students_add.html',
         {'groups': Group.objects.all().order_by('title')})
-
-def students_edit(request, sid):
-    return HttpResponse('<h1>Edit Student %s</h1>' % sid)
-
-def students_delete(request, sid):
-    return HttpResponse('<h1>Delete Student %s</h1>' % sid)
