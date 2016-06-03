@@ -121,12 +121,19 @@ TEMPLATE_CONTEXT_PROCESSORS = \
 
 # email settings
 # please, set here you smtp server details and your admin email
-ADMIN_EMAIL = '*****'
+
+ADMIN_EMAIL = 'mail4dmytro@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '******'
+EMAIL_HOST_USER = 'dmytro.mail.test@gmail.com'
 EMAIL_HOST_PASSWORD = 'mail4smtp'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Django contact form settings
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+MANAGERS = (
+    ('Dmytro admin', ADMIN_EMAIL),
+)

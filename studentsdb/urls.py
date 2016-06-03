@@ -17,7 +17,7 @@ from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from .settings import MEDIA_ROOT, DEBUG
 from students.views.students import StudentUpdateView, StudentDeleteView
-
+from students.views.contact_admin import AdminContactFormView
 
 urlpatterns = patterns('',
     # Students urls
@@ -79,7 +79,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Contact Admin Form
-    url(r'^contact-admin/$', 'students.views.contact_admin.contact_admin',
+    url(r'^contact-admin/$', AdminContactFormView.as_view(),
         name='contact_admin'),
     )
 

@@ -7,16 +7,22 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
-from studentsdb.settings import ADMIN_EMAIL
+# from studentsdb.settings import ADMIN_EMAIL
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-class ContactForm(forms.Form):
+from contact_form.forms import ContactForm
+from contact_form.views import ContactFormView
 
-    def __init__(self, *args, **kwargs):
+class AdminContactForm(ContactForm):
+
+    subject_template_name = 'contact_admin/contact_form_subject.txt'
+    template_name = 'contact_admin/contact_form.txt'
+
+    def __init__(self, request=None, *args, **kwargs):
         # call original initializator
-        super(ContactForm, self).__init__(*args, **kwargs)
+        super(AdminContactForm, self).__init__(request=request, *args, **kwargs)
 
         # this helper object allows us to customize form
         self.helper = FormHelper()
@@ -35,44 +41,22 @@ class ContactForm(forms.Form):
         # form buttons
         self.helper.add_input(Submit('send_button', u'Надіслати'))
 
-    from_email = forms.EmailField(
-        label=u"Ваша Емейл Адреса")
 
-    subject = forms.CharField(
-        label=u"Заголовок листа",
-        max_length=128)
+    def save(self, fail_silently=False):
+        # send_mail(fail_silently=fail_silently, **self.get_message_dict())
+        try:
+            send_mail(fail_silently=fail_silently, **self.get_message_dict())
+        except Exception:
+            messages.error(self.request,
+            u"Під час відправки листа виникла непередбачувана помилка."
+            u"Спробуйте скористатися даною формою пізніше.")
+        else:
+            messages.success(self.request, u"Повідомлення успішно надіслане!")
+        # messages.success(self.request, self.get_message_dict())
 
-    message = forms.CharField(
-        label=u"Текст повідомлення",
-        max_length=2560,
-        widget=forms.Textarea)
+class AdminContactFormView(ContactFormView):
+    form_class = AdminContactForm
+    template_name = 'contact_admin/form.html'
 
-def contact_admin(request):
-    # check if form was posted
-    if request.method == 'POST':
-        # create a form instance and populate it with data form the request
-        form = ContactForm(request.POST)
-
-        # check  whether user data is valid:
-        if form.is_valid():
-            # send email
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            from_email = form.cleaned_data['from_email']
-
-            try:
-                send_mail(subject, message, from_email, [ADMIN_EMAIL])
-            except Exception:
-                messages.error(request,
-                u"Під час відправки листа виникла непередбачувана помилка."
-                u"Спробуйте скористатися даною формою пізніше.")
-            else:
-                message.success(request, u"Повідомлення успішно надіслане!")
-
-            return HttpResponseRedirect(reverse('contact_admin'))
-
-    # if there was not POST render blank form
-    else:
-        form = ContactForm()
-
-    return render(request, 'contact_admin/form.html', {'form': form})
+    def get_success_url(self):
+        return reverse('contact_admin')
