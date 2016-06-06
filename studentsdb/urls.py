@@ -23,8 +23,8 @@ urlpatterns = patterns('',
     # Students urls
     url(r'^$', 'students.views.students.students_list', name='home'),
 
-    url(r'^students/add/$', 'students.views.students.students_add',
-        name='students_add'),
+    url(r'^students/add/$',
+        'students.views.students.students_add' , name='students_add'),
 
     url(r'students/(?P<pk>\d+)/edit/$',
         StudentUpdateView.as_view(), name='students_edit'),
