@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from .settings import MEDIA_ROOT, DEBUG
-from students.views.students import StudentDeleteView
+from studentqs.views.students import StudentDeleteView
 from students.views.contact_admin import AdminContactFormView
 
 urlpatterns = patterns('',
